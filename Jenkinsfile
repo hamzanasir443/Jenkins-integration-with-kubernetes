@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "thetips4you/nodeapp"
+    ARTIFACTORY_CREDENTIALS=credentials('2e8b5912-b6a0-4704-bf87-e5db31752bfd')
     dockerImage = ""
   }
 
@@ -14,28 +14,12 @@ pipeline {
         git 'https://github.com/hamzanasir443/Jenkins-integration-with-kubernetes.git'
       }
     }
-/*
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
-        }
-      }
-    }
+    stage('Login') {
 
-    stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhublogin'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
-        }
-      }
-    } */
-
+	   steps {
+		 sh 'echo $ARTIFACTORY_CREDENTIALS_PSW | docker login erl-artifactory7.eso.local -u $ARTIFACTORY_CREDENTIALS_USR --password-stdin'
+		 	}
+		 } 
     stage('Deploying App to Kubernetes') {
       steps {
         script {
