@@ -1,7 +1,6 @@
 pipeline {
 
   environment {
-    dockerimagename = "thetips4you/nodeapp"
     dockerImage = ""
   }
 
@@ -11,15 +10,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/shazforiot/Jenkins-integration-with-kubernetes.git'
-      }
-    }
-
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
-        }
+        git 'https://github.com/hamzanasir443/Jenkins-integration-with-kubernetes.git'
       }
     }
 
