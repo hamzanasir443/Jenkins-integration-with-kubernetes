@@ -8,13 +8,13 @@ pipeline {
   agent any
 
   stages {
-/*
+
     stage('Checkout Source') {
       steps {
         git 'https://github.com/hamzanasir443/Jenkins-integration-with-kubernetes.git'
       }
     }
-
+/*
     stage('Build image') {
       steps{
         script {
